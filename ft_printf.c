@@ -22,19 +22,10 @@ void	print_struct(t_struct params)
 	printf("star_space:  %d\n", params.star_space);
 	printf("star_accur:  %d\n", params.star_accur);
 	printf("count_zero:  %d\n", params.count_zero);
-	printf("count_space: %d\n", params.count_space);
-	printf("type:        %s\n", params.this_type);
+	printf("space_r:     %d\n", params.space_r);
+	printf("space_l:     %d\n", params.space_l);
+	printf("type:        %c\n", params.this_type);
 	printf("*******\n");
-}
-
-size_t	ft_strlen(const char *str)
-{
-	size_t	n;
-
-	n = 0;
-	while (*((char *)str + n) != '\0')
-		n++;
-	return (n);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -58,22 +49,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	j++;
 	rez[i + j] = '\0';
 	return (rez);
-}
-
-void    ft_putchar(char c)
-{
-    write(1, &c, 1);
-}
-
-void    ft_putnbr(int n)
-{
-	if (n >= 10)
-	{
-		ft_putnbr(n / 10);
-		ft_putnbr(n % 10);
-	}
-	else
-	  ft_putchar(48 + n);
 }
 
 int	ft_atoi_one(char str)
@@ -196,9 +171,8 @@ t_struct	*struct_init(void)
 	params->star_space = 0;
 	params->star_accur = 0;
 	params->count_zero = 0;
-	params->count_space = 0;
-	params->this_type = malloc(2);
-	params->this_type[1] = 0;
+	params->space_r = 0;
+	params->space_l = 0;
 	return (params);
 }
 
@@ -210,24 +184,22 @@ int	params_parser(const char *str, t_struct *params)
 	*params = *struct_init();
 	while (str[i])
 	{
-		//printf("\n(%d)\n", i);
 		if (str[i] == '*')
 			i += stars(params);
 		else if (str[i] == '-')
-			i += counts(&str[i], &params->count_space);
+			i += counts(&str[i], &params->space_l);
 		else if (str[i] == '0')
 			if (str[i + 1] == '-')
-				i += counts(&str[i], &params->count_space);
+				i += counts(&str[i], &params->space_l);
 			else
 				i += counts(&str[i], &params->count_zero);
 		else if (str[i] == '.')
 			i += counts(&str[i], &params->accur);
 		else if ((str[i] != '0' && ft_isdigit(str[i])))
-			i += numbers(&str[i], &params->count_space);
+			i += numbers(&str[i], &params->space_r);
 		else
 		{
-			//printf("\n++ %c ++\n", str[i]);
-			params->this_type[0] = str[i];
+			params->this_type = str[i];
 			i++;
 		}
 	}
@@ -235,13 +207,18 @@ int	params_parser(const char *str, t_struct *params)
 	return (i);
 }
 
-void	the_same_print(t_struct params)
+int	definition_type(t_struct params)//, va_list types)
 {
-	int width;
-	int accure;
-	int	len;
-
-
+	int	count;
+	
+	count = 0;
+	if (params.this_type == 'd' || params.this_type == 'i')
+		count += print_int(12, params);
+	else if (params.this_type == 'c')
+		count += print_char('p', params);
+	else if (params.this_type == 's')
+		count += print_str("qwerty", params);
+	return (count);
 }
 
 int ft_printf(const char *str, ...)
@@ -263,7 +240,7 @@ int ft_printf(const char *str, ...)
 		{
 			i += params_parser(get_params(&str[i]), &params) + 1;
 			print_struct(params);
-			if (params.this_type == "d\0" || params.this_type == "i\0")
+			definition_type(params);
 		}
     }
 	return (0);
