@@ -11,4 +11,4 @@
 # **************************************************************************** #
 
 
-gcc -Wall -Werror -Wextra ft_printf.c print_utils.c print_int.c print_c.c libs.c main.c
+gcc -Wall -Werror -Wextra ft_printf.c print_utils.c print_int.c print_c.c print_s.c libs.c main.c

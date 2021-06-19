@@ -12,5 +12,6 @@ int main()
 	printf("begin %-15dend\n", 7);
 	printf("begin %-15dend\n", 7);*/
 	//printf("")
-	ft_printf("0----%15styu-\n", "qwerty");
+	ft_printf("0----%15dtyu-\n", "qwerty");
+	printf("0----%-15styu-", "qwerty");
 }

@@ -42,3 +42,16 @@ void	ft_putstr(char *s, int fd)
 {
 	write(fd, s, ft_strlen(s));
 }
+
+int	ft_putnstr(char *s, int n)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] && i < n)
+	{
+		write(1, &s[i], 1);
+		i++;
+	}
+	return (i - 1);
+}

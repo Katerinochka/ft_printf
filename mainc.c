@@ -4,5 +4,7 @@
 
 int main()
 {
-	printf("|%-12s|", "qwerty");
+	int	a;
+	a = 2;
+	printf("|%25u|", -12);
 }

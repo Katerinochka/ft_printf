@@ -46,6 +46,8 @@ int	print_int(int num, t_struct params)
 	int	spaces;
 
 	len = len_num(num);
+	if (num < 0)
+		len++;
 	width = params.space_l;
 	accure = params.accur;
 	zeros = accure - len;
@@ -54,6 +56,8 @@ int	print_int(int num, t_struct params)
 	{
 		print_space(spaces);
 		print_zero(zeros);
+		if (num < 0)
+			ft_putchar('-');
 		ft_putnbr(num);
 		if (params.space_r)
 			print_space(params.space_r - len);

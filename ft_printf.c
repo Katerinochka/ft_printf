@@ -213,11 +213,15 @@ int	definition_type(t_struct params)//, va_list types)
 	
 	count = 0;
 	if (params.this_type == 'd' || params.this_type == 'i')
-		count += print_int(12, params);
+		count += print_int(-15, params);
 	else if (params.this_type == 'c')
 		count += print_char('p', params);
 	else if (params.this_type == 's')
 		count += print_str("qwerty", params);
+	else if (params.this_type == 'x')
+		count += print_x((unsigned int)232, "0123456789abcdef", params);
+	else if (params.this_type == 'X')
+		count += print_x((unsigned int)232, "0123456789ABCDEF", params);
 	return (count);
 }
 
@@ -239,7 +243,7 @@ int ft_printf(const char *str, ...)
         else
 		{
 			i += params_parser(get_params(&str[i]), &params) + 1;
-			print_struct(params);
+			//print_struct(params);
 			definition_type(params);
 		}
     }

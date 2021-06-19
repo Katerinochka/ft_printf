@@ -49,4 +49,10 @@ void	print_space(int count);
 
 void	print_zero(int count);
 
+int     ft_putnstr(char *s, int n);
+
+int	    print_p(unsigned long long ptr, t_struct params);
+
+int	    print_x(unsigned int num,char *strx, t_struct params);
+
 #endif
