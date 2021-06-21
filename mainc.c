@@ -5,6 +5,5 @@
 int main()
 {
 	int	a;
-	a = 2;
-	printf("|%25u|", -12);
+	printf("|%d|", NULL);
 }

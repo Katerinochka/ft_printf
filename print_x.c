@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int	print_x(unsigned int num,char *strx, t_struct params)
+int	print_x(unsigned int num, char *strx, t_struct params)
 {
 	char	rez[9];
 	int		i;

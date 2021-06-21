@@ -14,18 +14,29 @@
 
 void    ft_putchar(char c)
 {
-    write(1, &c, 1);
+	if (c == 0)
+		write(1, "0", 1);
+	else
+    	write(1, &c, 1);
 }
 
 void    ft_putnbr(int n)
 {
-	if (n >= 10)
+	long int	nn;
+
+	nn = (long int)n;
+	if (nn < 0)
 	{
-		ft_putnbr(n / 10);
-		ft_putnbr(n % 10);
+		ft_putchar('-');
+		nn = -nn;
+	}
+	if (nn >= 10)
+	{
+		ft_putnbr(nn / 10);
+		ft_putnbr(nn % 10);
 	}
 	else
-	  ft_putchar(48 + n);
+		ft_putchar(48 + nn);
 }
 
 size_t	ft_strlen(const char *str)
@@ -54,4 +65,17 @@ int	ft_putnstr(char *s, int n)
 		i++;
 	}
 	return (i - 1);
+}
+
+int	len_num(int num)
+{
+	int	len;
+
+	len = 0;
+	while (num)
+	{
+		num /=10;
+		len++;
+	}
+	return (len);
 }

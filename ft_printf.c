@@ -116,7 +116,7 @@ char    *get_params(const char *str)
         {
             params = ft_strjoin(params, &str[j]);
             j++;
-            if (ft_isalpha(str[j]))
+            if (ft_isalpha(str[j]) && !(ft_isalpha(params[ft_strlen(params) - 1])))
 			{
 				params = ft_strjoin(params, &str[j]);
 				break ;
@@ -167,7 +167,7 @@ t_struct	*struct_init(void)
 	t_struct	*params;
 
 	params = malloc(sizeof(t_struct));
-	params->accur = 0;
+	params->accur = -1;
 	params->star_space = 0;
 	params->star_accur = 0;
 	params->count_zero = 0;
@@ -196,12 +196,9 @@ int	params_parser(const char *str, t_struct *params)
 		else if (str[i] == '.')
 			i += counts(&str[i], &params->accur);
 		else if ((str[i] != '0' && ft_isdigit(str[i])))
-			i += numbers(&str[i], &params->space_r);
+			i += numbers(&str[i], &params->space_l);
 		else
-		{
-			params->this_type = str[i];
-			i++;
-		}
+			params->this_type = str[i++];
 	}
 	//print_struct(*params);
 	return (i);
@@ -213,15 +210,19 @@ int	definition_type(t_struct params)//, va_list types)
 	
 	count = 0;
 	if (params.this_type == 'd' || params.this_type == 'i')
-		count += print_int(-15, params);
+		count += print_int(11, params);
 	else if (params.this_type == 'c')
 		count += print_char('p', params);
 	else if (params.this_type == 's')
 		count += print_str("qwerty", params);
 	else if (params.this_type == 'x')
-		count += print_x((unsigned int)232, "0123456789abcdef", params);
+		count += print_x((unsigned int)4294967295, "0123456789abcdef", params);
 	else if (params.this_type == 'X')
 		count += print_x((unsigned int)232, "0123456789ABCDEF", params);
+	else if (params.this_type == 'p')
+		count += print_p((unsigned long)NULL, "0123456789abcdef", params);
+	else if (params.this_type == 'u')
+		count += print_u(-5, params);
 	return (count);
 }
 

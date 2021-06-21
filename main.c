@@ -12,6 +12,9 @@ int main()
 	printf("begin %-15dend\n", 7);
 	printf("begin %-15dend\n", 7);*/
 	//printf("")
-	ft_printf("0----%15dtyu-\n", "qwerty");
-	printf("0----%-15styu-", "qwerty");
+	int a;
+	
+	a = 0;
+	ft_printf("0----%015dtyu-\n", "qwerty");
+	printf("0----%15dtyu-\n", 11);
 }

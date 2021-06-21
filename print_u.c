@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_p.c                                          :+:      :+:    :+:   */
+/*   print_u.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroselyn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/17 17:35:43 by aroselyn          #+#    #+#             */
-/*   Updated: 2021/06/17 17:35:48 by aroselyn         ###   ########.fr       */
+/*   Created: 2021/06/21 16:25:57 by aroselyn          #+#    #+#             */
+/*   Updated: 2021/06/21 16:25:59 by aroselyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	print_p(unsigned long ptr, char *strx, t_struct params)
+int	print_u(unsigned int num, t_struct params)
 {
-	char	rez[20];
-	int		i;
-	int		len;
+	int	len;
+	int width;
+	int accure;
+	int	zeros;
+	int	spaces;
 
-	i = 0;
-	while (ptr)
+	len = len_num(num);
+	width = params.space_l;
+	accure = params.accur;
+	zeros = accure - len;
+	spaces = width - zeros - len;
+	if (!(accure == 0 && num == 0))
 	{
-		rez[i++] = strx[ptr % 16];
-		ptr = ptr / 16;
+		print_space(spaces);
+		print_zero(zeros);
+		ft_putnbr(num);
+		if (params.space_r)
+			print_space(params.space_r - len);
+		return (len);
 	}
-	len = ft_strlen(rez);
-	if (params.space_r)
-		print_space(params.space_r - len);
-	ft_putnstr("0x", 2);
-	if (len == 0)
-		ft_putchar('0');
-	while (i >= 0)
-		ft_putchar(rez[--i]);
-	if (params.space_l)
-		print_space(params.space_l - len);
 	return (1);
 }

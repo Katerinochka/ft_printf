@@ -35,6 +35,8 @@ void    ft_putchar(char c);
 
 void    ft_putnbr(int n);
 
+int	    len_num(int num);
+
 size_t	ft_strlen(const char *str);
 
 void	ft_putstr(char *s, int fd);
@@ -51,8 +53,10 @@ void	print_zero(int count);
 
 int     ft_putnstr(char *s, int n);
 
-int	    print_p(unsigned long long ptr, t_struct params);
+int	    print_p(unsigned long ptr, char *strx, t_struct params);
 
-int	    print_x(unsigned int num,char *strx, t_struct params);
+int	    print_x(unsigned int num, char *strx, t_struct params);
+
+int	    print_u(unsigned int num, t_struct params);
 
 #endif
